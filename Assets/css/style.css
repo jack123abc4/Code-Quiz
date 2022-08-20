@@ -1,0 +1,22 @@
+header,
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: gray;
+}
+
+.header-block{
+    display: inline;
+    width:50%;
+    height:75px;
+}
+
+
+#hiscores {
+    float: left;
+    border:2px;
+    background-color: aqua;
+}
+
+#timer {
+    float: right;
+}
