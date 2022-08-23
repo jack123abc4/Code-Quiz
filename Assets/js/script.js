@@ -1,5 +1,7 @@
 var timerEl = document.querySelector("#timer");
 var mainTextEl = document.querySelector("#main-text");
+var mainTextHeaderEl = mainTextEl.children[0];
+var mainTextParagraphEl = mainTextEl.children[1];
 var startButton = document.createElement("button");
 var secondsLeft = 0;
 
@@ -40,8 +42,6 @@ function displayQuestion(qNum) {
 }
 
 function startMenu() {
-    mainTextHeaderEl = mainTextEl.children[0];
-    mainTextParagraphEl = mainTextEl.children[1];
 
     mainTextHeaderEl.textContent = "Coding Quiz Challenge";
     mainTextParagraphEl.textContent = "Test your skills in this coding quiz challenge! Answer correctly and beat the timer to set a new highscore. But remember - wrong answers will cost you!";
@@ -61,6 +61,20 @@ function startGame() {
 
 startButton.addEventListener("click", function() {
     startGame()
+})
+
+mainTextParagraphEl.addEventListener("click", function(event) {
+    console.log(event.target);
+    console.log(event.target.tagName);
+    if (event.target.tagName === "BUTTON") {
+        console.log("Answer selected:",event.target.textContent);
+        
+    }
+    else {
+        console.log("No answer selected.");
+    }
+    
+    
 })
 
 function init() {
