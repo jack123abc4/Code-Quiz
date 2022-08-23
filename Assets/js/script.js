@@ -36,7 +36,7 @@ function displayQuestion() {
         var answerButton = document.createElement("button");
         answerButton.textContent = answerOptions[qNum][i];
         mainTextParagraphEl.appendChild(answerButton);
-        // answerButton.classList.addStyle(".center");
+        answerButton.classList.add("center");
         
     }
     // mainTextParagraphEl.textContent = answerOptions[qNum];

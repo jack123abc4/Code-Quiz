@@ -47,4 +47,5 @@ body {
 
 button {
     margin: 3px;
+    display: block;
 }
