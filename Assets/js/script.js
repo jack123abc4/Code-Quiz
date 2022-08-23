@@ -6,9 +6,9 @@ var startButton = document.createElement("button");
 var secondsLeft = 0;
 var qNum = 0;
 
-var questions = ["What does DOM stand for?", "Which of the following is not considered a primitive type in Javascript?", "Which comparison symbol is used to check for strict equality?"];
-var answerOptions = [["Dramatic Overreaction, Mom", "Document Object Model", "Data-Oriented Mechanism", "Dentists' Organization of Mouths"], ["String", "Boolean", "Number", "Object"], ["==", "!=", "===", "!=="]];
-var correctAnswers = ["Document Object Model", "Object", "==="];
+var questions = ["What does DOM stand for?", "Which of the following is not considered a primitive type in Javascript?", "Which comparison symbol is used to check for strict equality?", "Which letter is most commonly used as the name for an iterator variable?", "What unit of time does a Javascript timer use?"];
+var answerOptions = [["Dramatic Overreaction, Mom", "Document Object Model", "Data-Oriented Mechanism", "Dentists' Organization of Mouths"], ["String", "Boolean", "Number", "Object"], ["==", "!=", "===", "!=="],["h","i","j","k"],["seconds","minutes","milliseconds","gigawatts"]];
+var correctAnswers = ["Document Object Model", "Object", "===", "i","milliseconds"];
 
 
 function setTime() {
@@ -33,7 +33,7 @@ function updateTime() {
 }
 
 function displayQuestion() {
-    if (qNum === questions.length) {
+    if (qNum === questions.length || secondsLeft <= 0) {
         resultsMenu();
         return;
     }
@@ -64,9 +64,17 @@ function incorrectAnswer() {
 
 function resultsMenu() {
     timerEl.style.display = "none";
-    var finalScore = timerEl.children[0].textContent;
+    var finalScore = secondsLeft;
+    if (finalScore < 0) {
+        finalScore = 0;
+    }
     console.log(finalScore);
-    mainTextHeaderEl.textContent = "All Done!";
+    if (finalScore === 0) {
+        mainTextHeaderEl.textContent = "Time's Up!"
+    }
+    else {
+        mainTextHeaderEl.textContent = "All Done!";
+    }
     mainTextParagraphEl.textContent = "Your score was: " + finalScore;
     
 }
