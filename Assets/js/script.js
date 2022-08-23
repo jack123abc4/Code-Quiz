@@ -26,11 +26,17 @@ function setTime() {
 
 function displayQuestion(qNum) {
     mainTextHeaderEl.textContent = questions[qNum];
-    // for (var i = 0; i < answerOptions[qNum].length; i++) {
-    //     var answerButton = document.createElement("button");
-    //     answerButton.textContent
-    // }
-    mainTextParagraphEl.textContent = answerOptions[qNum];
+    mainTextParagraphEl.textContent = "";
+    // var answerListEl = document.createElement("ul");
+    // mainTextEl.append(answerListEl);
+    for (var i = 0; i < answerOptions[qNum].length; i++) {
+        var answerButton = document.createElement("button");
+        answerButton.textContent = answerOptions[qNum][i];
+        mainTextParagraphEl.appendChild(answerButton);
+        // answerButton.classList.addStyle(".center");
+        
+    }
+    // mainTextParagraphEl.textContent = answerOptions[qNum];
 }
 
 function startMenu() {
