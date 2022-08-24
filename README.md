@@ -14,6 +14,10 @@ This code can be run in any standard browser. Simply download the files and open
 
 !["Gameplay screenshot"](assets/images/screenshot1.png)
 
+## Credits
+
+N/A
+
 ## License
 
 MIT License
