@@ -1,4 +1,5 @@
 var timerEl = document.querySelector("#timer");
+var hiscoreEl = document.querySelector("#hiscores");
 var mainTextEl = document.querySelector("#main-text");
 var mainTextHeaderEl = mainTextEl.children[0];
 var mainTextParagraphEl = mainTextEl.children[1];
@@ -21,7 +22,7 @@ function setTime() {
         function() {
             secondsLeft--;
             updateTime();
-            if (secondsLeft === 0){
+            if (secondsLeft === 0 || inMenu){
                 clearInterval(timerInterval);
                 if (!inMenu) {
                     resultsMenu();
@@ -102,9 +103,13 @@ function resultsMenu() {
 
 function showScores() {
     inMenu = true;
+    timerEl.style.display = "none";
     mainTextHeaderEl.textContent = "Highscores";
     mainTextParagraphEl.textContent = "";
-    document.querySelector("#initial-label").remove();
+    if (document.querySelector("#initial-label")) {
+        document.querySelector("#initial-label").remove();
+    }
+    
     
     var scoresList = document.createElement("ol");
     scoresList.classList.add("center");
@@ -186,8 +191,11 @@ mainTextEl.addEventListener("click", function(event) {
     else if (event.target.classList.contains("clear-button")) {
         document.querySelector("ol").textContent = "";
         localStorage.clear();
-        showScores();
     }
+})
+
+hiscoreEl.addEventListener("click", function(event) {
+    showScores();
 })
 
 function init() {
