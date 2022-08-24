@@ -118,9 +118,14 @@ function showScores() {
     scoresList.classList.add("center");
     mainTextEl.appendChild(scoresList);
     
+    scoreBoardArr = [];
     for (var i = 0; i < Object.keys(localStorage).length; i++) {
+        scoreBoardArr.push([localStorage.getItem(Object.keys(localStorage)[i]), Object.keys(localStorage)[i]]);
+    }
+    scoreBoardArr = scoreBoardArr.sort().reverse();
+    for (var i = 0; i < scoreBoardArr.length; i++) {
         var scoreItem = document.createElement("li");
-        scoreItem.textContent = Object.keys(localStorage)[i] + "\t\t --- \t\t" + localStorage.getItem(Object.keys(localStorage)[i]);
+        scoreItem.textContent = scoreBoardArr[i][1] + "\t\t --- \t\t" + scoreBoardArr[i][0];
         scoresList.appendChild(scoreItem);
     }
     var goBackButton = document.createElement("button");
