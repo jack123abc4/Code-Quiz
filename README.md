@@ -12,7 +12,7 @@ N/A
 
 This code can be run in any standard browser. Simply download the files and open it using Google Chrome, Firefox etc. From there, the user can use the UI buttons to start the game and select their answers. At the end, the user is able to enter their initials to locally save their score and view the other scores that have been made on the system. The "View Highscores" button can be used to view the highscores at any time.
 
-!["Gameplay screenshot"](assets/images/screenshot1.png)
+![screenshot1](https://user-images.githubusercontent.com/15790800/186443244-ae92ab77-df07-445e-81f4-6a57de367bcf.PNG)
 
 ## Credits
 
