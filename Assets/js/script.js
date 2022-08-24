@@ -12,7 +12,7 @@ var correctAnswers = ["Document Object Model", "Object", "===", "i","millisecond
 
 
 function setTime() {
-    secondsLeft = 30;
+    secondsLeft = 60;
     timerEl.children[0].textContent = secondsLeft;
     timer.style.display = "block";
     var timerInterval = setInterval(
@@ -44,7 +44,7 @@ function displayQuestion() {
     for (var i = 0; i < answerOptions[qNum].length; i++) {
         var answerButton = document.createElement("button");
         answerButton.textContent = answerOptions[qNum][i];
-        answerButton.classList.add("center");
+        answerButton.classList.add("center", "answer-button");
         mainTextParagraphEl.appendChild(answerButton);
         
         
@@ -57,7 +57,7 @@ function correctAnswer() {
 }
 
 function incorrectAnswer() {
-    secondsLeft -= 10;
+    secondsLeft -= 15;
     updateTime();
 }
 
@@ -76,7 +76,24 @@ function resultsMenu() {
         mainTextHeaderEl.textContent = "All Done!";
     }
     mainTextParagraphEl.textContent = "Your score was: " + finalScore;
+    var initialLabel = document.createElement("label");
+    initialLabel.textContent = "Enter initials: ";
+    initialLabel.classList.add("center");
+    var initialField = document.createElement("input");
+    initialField.setAttribute("id","initials");
+    mainTextEl.appendChild(initialLabel);
+    initialLabel.appendChild(initialField);
+
+    var submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
+    submitButton.style.display = "inline";
+    submitButton.classList.add("submit-button");
+    initialLabel.appendChild(submitButton);
     
+}
+
+function submitScore() {
+    console.log()
 }
 
 function startMenu() {
@@ -101,8 +118,9 @@ startButton.addEventListener("click", function() {
     startGame()
 })
 
-mainTextParagraphEl.addEventListener("click", function(event) {
-    if (event.target.tagName === "BUTTON") {
+mainTextEl.addEventListener("click", function(event) {
+    console.log(event.target);
+    if (event.target.classList.contains("answer-button")) {
         console.log("Answer selected:", event.target.textContent);
         console.log("Correct answer: ", correctAnswers[qNum]);
         if (event.target.textContent === correctAnswers[qNum]) {
@@ -117,11 +135,11 @@ mainTextParagraphEl.addEventListener("click", function(event) {
         displayQuestion();
         
     }
-    else {
-        console.log("No answer selected.");
+    else if (event.target.classList.contains("submit-button")) {
+        initials = event.target.parentElement.children[0].value;
+        console.log(initials);
+        submitScore();
     }
-    
-    
 })
 
 function init() {

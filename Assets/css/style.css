@@ -49,3 +49,7 @@ button {
     margin: 3px;
     display: block;
 }
+
+input {
+    display: inline;
+}
