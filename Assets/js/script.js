@@ -6,6 +6,7 @@ var startButton = document.createElement("button");
 var secondsLeft = 0;
 var finalScore = 0;
 var qNum = 0;
+var inMenu = true;
 
 var questions = ["What does DOM stand for?", "Which of the following is not considered a primitive type in Javascript?", "Which comparison symbol is used to check for strict equality?", "Which letter is most commonly used as the name for an iterator variable?", "What unit of time does a Javascript timer use?"];
 var answerOptions = [["Dramatic Overreaction, Mom", "Document Object Model", "Data-Oriented Mechanism", "Dentists' Organization of Mouths"], ["String", "Boolean", "Number", "Object"], ["==", "!=", "===", "!=="],["h","i","j","k"],["seconds","minutes","milliseconds","gigawatts"]];
@@ -22,6 +23,9 @@ function setTime() {
             updateTime();
             if (secondsLeft === 0){
                 clearInterval(timerInterval);
+                if (!inMenu) {
+                    resultsMenu();
+                }
                 // alert("Time's up!");
             }
         },
@@ -34,6 +38,7 @@ function updateTime() {
 }
 
 function displayQuestion() {
+    inMenu = false;
     if (qNum === questions.length || secondsLeft <= 0) {
         resultsMenu();
         return;
@@ -64,6 +69,7 @@ function incorrectAnswer() {
 
 
 function resultsMenu() {
+    inMenu = true;
     timerEl.style.display = "none";
     finalScore = secondsLeft;
     if (finalScore < 0) {
@@ -95,6 +101,7 @@ function resultsMenu() {
 }
 
 function showScores() {
+    inMenu = true;
     mainTextHeaderEl.textContent = "Highscores";
     mainTextParagraphEl.textContent = "";
     document.querySelector("#initial-label").remove();
@@ -108,12 +115,24 @@ function showScores() {
         scoreItem.textContent = Object.keys(localStorage)[i] + "\t\t --- \t\t" + localStorage.getItem(Object.keys(localStorage)[i]);
         scoresList.appendChild(scoreItem);
     }
+    var goBackButton = document.createElement("button");
+    goBackButton.classList.add("center");
+    goBackButton.display = "block";
+    goBackButton.textContent = "Go Back";
+
+    var clearScoresButton = document.createElement("button");
+    clearScoresButton.classList.add("center");
+    clearScoresButton.display = "inline";
+    clearScoresButton.textContent = "Clear Scores";
     
+    mainTextEl.appendChild(goBackButton);
+    mainTextEl.appendChild(clearScoresButton);
     
 
 }
 
 function startMenu() {
+    inMenu = true;
     mainTextHeaderEl.textContent = "Coding Quiz Challenge";
     mainTextParagraphEl.textContent = "Test your skills in this coding quiz challenge! Answer correctly and beat the timer to set a new highscore. But remember - wrong answers will cost you!";
 
