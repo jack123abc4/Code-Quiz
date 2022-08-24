@@ -116,12 +116,12 @@ function showScores() {
         scoresList.appendChild(scoreItem);
     }
     var goBackButton = document.createElement("button");
-    goBackButton.classList.add("center");
+    goBackButton.classList.add("center", "back-button");
     goBackButton.display = "block";
     goBackButton.textContent = "Go Back";
 
     var clearScoresButton = document.createElement("button");
-    clearScoresButton.classList.add("center");
+    clearScoresButton.classList.add("center", "clear-button");
     clearScoresButton.display = "inline";
     clearScoresButton.textContent = "Clear Scores";
     
@@ -175,6 +175,17 @@ mainTextEl.addEventListener("click", function(event) {
         initials = document.querySelector("#initials").value.trim().toUpperCase();
         console.log(initials);
         localStorage.setItem(initials,finalScore);
+        showScores();
+    }
+    else if (event.target.classList.contains("back-button")) {
+        document.querySelector("ol").remove();
+        document.querySelector(".back-button").remove();
+        document.querySelector(".clear-button").remove();
+        startMenu();
+    }
+    else if (event.target.classList.contains("clear-button")) {
+        document.querySelector("ol").textContent = "";
+        localStorage.clear();
         showScores();
     }
 })
