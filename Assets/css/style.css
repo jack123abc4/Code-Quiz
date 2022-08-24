@@ -53,3 +53,7 @@ button {
 input {
     display: inline;
 }
+
+li {
+    text-align: left;
+}

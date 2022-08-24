@@ -4,11 +4,12 @@ var mainTextHeaderEl = mainTextEl.children[0];
 var mainTextParagraphEl = mainTextEl.children[1];
 var startButton = document.createElement("button");
 var secondsLeft = 0;
+var finalScore = 0;
 var qNum = 0;
 
 var questions = ["What does DOM stand for?", "Which of the following is not considered a primitive type in Javascript?", "Which comparison symbol is used to check for strict equality?", "Which letter is most commonly used as the name for an iterator variable?", "What unit of time does a Javascript timer use?"];
 var answerOptions = [["Dramatic Overreaction, Mom", "Document Object Model", "Data-Oriented Mechanism", "Dentists' Organization of Mouths"], ["String", "Boolean", "Number", "Object"], ["==", "!=", "===", "!=="],["h","i","j","k"],["seconds","minutes","milliseconds","gigawatts"]];
-var correctAnswers = ["Document Object Model", "Object", "===", "i","milliseconds"];
+var correctAnswers = ["Document Object Model", "Object", "===", "i", "milliseconds"];
 
 
 function setTime() {
@@ -64,7 +65,7 @@ function incorrectAnswer() {
 
 function resultsMenu() {
     timerEl.style.display = "none";
-    var finalScore = secondsLeft;
+    finalScore = secondsLeft;
     if (finalScore < 0) {
         finalScore = 0;
     }
@@ -79,6 +80,7 @@ function resultsMenu() {
     var initialLabel = document.createElement("label");
     initialLabel.textContent = "Enter initials: ";
     initialLabel.classList.add("center");
+    initialLabel.setAttribute("id", "initial-label");
     var initialField = document.createElement("input");
     initialField.setAttribute("id","initials");
     mainTextEl.appendChild(initialLabel);
@@ -92,8 +94,23 @@ function resultsMenu() {
     
 }
 
-function submitScore() {
-    console.log()
+function showScores() {
+    mainTextHeaderEl.textContent = "Highscores";
+    mainTextParagraphEl.textContent = "";
+    document.querySelector("#initial-label").remove();
+    
+    var scoresList = document.createElement("ol");
+    scoresList.classList.add("center");
+    mainTextEl.appendChild(scoresList);
+    
+    for (var i = 0; i < Object.keys(localStorage).length; i++) {
+        var scoreItem = document.createElement("li");
+        scoreItem.textContent = Object.keys(localStorage)[i] + "\t\t --- \t\t" + localStorage.getItem(Object.keys(localStorage)[i]);
+        scoresList.appendChild(scoreItem);
+    }
+    
+    
+
 }
 
 function startMenu() {
@@ -136,9 +153,10 @@ mainTextEl.addEventListener("click", function(event) {
         
     }
     else if (event.target.classList.contains("submit-button")) {
-        initials = event.target.parentElement.children[0].value;
+        initials = document.querySelector("#initials").value.trim().toUpperCase();
         console.log(initials);
-        submitScore();
+        localStorage.setItem(initials,finalScore);
+        showScores();
     }
 })
 
