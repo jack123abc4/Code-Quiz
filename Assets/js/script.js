@@ -109,6 +109,9 @@ function showScores() {
     if (document.querySelector("#initial-label")) {
         document.querySelector("#initial-label").remove();
     }
+    if (document.querySelector(".start-button")) {
+        document.querySelector(".start-button").remove();
+    }
     
     
     var scoresList = document.createElement("ol");
@@ -142,7 +145,7 @@ function startMenu() {
     mainTextParagraphEl.textContent = "Test your skills in this coding quiz challenge! Answer correctly and beat the timer to set a new highscore. But remember - wrong answers will cost you!";
 
     startButton.style.display = "block";
-    startButton.classList.add("center");
+    startButton.classList.add("center","start-button");
     startButton.textContent = "Start Game";
     mainTextEl.appendChild(startButton);
 }
